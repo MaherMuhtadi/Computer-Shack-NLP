@@ -119,7 +119,8 @@ what(Words, Ref) :- np(Words, Ref).
 np([Name],Name) :- proper_noun(Name).
 np([Art|Rest], What) :- article(Art), np2(Rest, What).
 
-% This rule handles the article 'the' in a noun phrase. A noun phrase can start with the article 'the'.
+/* This rule handles the article 'the' in a noun phrase. A noun phrase can start with the article 'the'.
+   This rule makes sure that noun phrases starting with 'the' only has one reference.*/
 np([the|Rest], What) :- np2(Rest, What), not (np2(Rest, What2), not (What2 = What)).
 
 /* If a noun phrase starts with an article, then it must be followed
